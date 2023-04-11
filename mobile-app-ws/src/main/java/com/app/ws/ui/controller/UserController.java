@@ -4,7 +4,6 @@ import com.app.ws.service.UserService;
 import com.app.ws.shared.dto.UserDto;
 import com.app.ws.ui.request.UserDetailsRequestModel;
 import com.app.ws.ui.response.UserRest;
-import org.hibernate.type.internal.UserTypeJavaTypeWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

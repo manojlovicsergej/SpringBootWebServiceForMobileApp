@@ -5,10 +5,10 @@ import com.app.ws.io.entity.UserEntity;
 import com.app.ws.service.UserService;
 import com.app.ws.shared.Utils;
 import com.app.ws.shared.dto.UserDto;
-import jdk.jshell.execution.Util;
-import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +41,10 @@ public class UserServiceImpl implements UserService {
 
         BeanUtils.copyProperties(storedUserDetails,returnValue);
         return returnValue;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
