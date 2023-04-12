@@ -11,7 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 public class WebSecurity{
-
     private final UserService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -21,13 +20,19 @@ public class WebSecurity{
     }
 
     @Bean
-    protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         AuthenticationManagerBuilder authenticationManagerBuilder =
                     http.getSharedObject(AuthenticationManagerBuilder.class);
 
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 
-        http.csrf().disable().authorizeRequests().requestMatchers(HttpMethod.POST,"/users").permitAll().anyRequest().authenticated();
+        http.csrf().disable().authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST,SecurityConstants.SIGN_UP_URL)
+                .permitAll()
+                .anyRequest()
+                .authenticated();
+//                .and()
+//                .addFilter(new AuthenticationFilter(authenticationManager()));
 
         return http.build();
     }
